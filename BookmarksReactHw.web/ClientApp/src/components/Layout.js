@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
     return (
         <div>
             <header>
-                <nav className="navbar navbar-expand-sm navbar-dark fixed-top bg-dark border-bottom box-shadow">
+                <nav className="navbar navbar-expand-sm fixed-top border-bottom box-shadow">
                     <div className="container">
                         <Link to='/' className="navbar-brand"> Bookmarks Manager </Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse"
@@ -21,13 +21,13 @@ const Layout = ({ children }) => {
                         <div className="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                             <ul className="navbar-nav flex-grow-1">
                                 {!!isLoggedIn && <>
-                                    <li className="nav-item"><Link to="/" className='nav-link text-light'>Home</Link></li>
-                                    <li className="nav-item"><Link to="/AddBookmark" className='nav-link text-light'>Add Bookmark</Link></li>
-                                    <li className="nav-item"><Link to="/logout" className='nav-link text-light'>Logout</Link></li>
+                                    <li className="nav-item"><Link to="/" className='nav-link'>Home</Link></li>
+                                    <li className="nav-item"><Link to="/AddBookmark" className='nav-link'>Add Bookmark</Link></li>
+                                    <li className="nav-item"><Link to="/logout" className='nav-link'>Logout</Link></li>
                                 </>}
                                 {!isLoggedIn && <>
-                                    <li className="nav-item"><Link to="/signup" className='nav-link text-light'>Signup Here!</Link></li>
-                                    <li className="nav-item"><Link to="/login" className='nav-link text-light'>Login Here!</Link></li>
+                                    <li className="nav-item"><Link to="/signup" className='nav-link'>Signup</Link></li>
+                                    <li className="nav-item"><Link to="/login" className='nav-link'>Login</Link></li>
                                 </>}
                             </ul>
 

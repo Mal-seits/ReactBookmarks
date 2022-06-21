@@ -1,10 +1,22 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+
+const inputStyle = {
+    width: '250px',
+    border: '1px solid #DCDCDC',
+    borderRadius: 4,
+    height: 35,
+    marginBottom: 16
+
+}
+
 const Signup = () => {
 
     const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', password: '' });
+    const [disableButton, setDisableButton] = useState(false);
     let { firstName, lastName, email, password } = formData;
+
     const history = useHistory();
 
     const onTextChange = e => {
@@ -14,25 +26,23 @@ const Signup = () => {
     }
 
     const onFormSubmit = async e => {
+        setDisableButton(true);
         e.preventDefault();
-        axios.post('/api/account/signup', formData);
+        await axios.post('/api/account/signup', formData);
+        setDisableButton(false)
         history.push('/');
     }
 
     return (
-        <div className="col-md-6 offset-md-3 card card-body bg-light">
-            <h3>Sign up for a new account</h3>
-            <form onSubmit={onFormSubmit}>
-                <input onChange={onTextChange} type="text" name="firstName" placeholder="First Name" className="form-control" value={firstName} />
-                <br />
-                <input onChange={onTextChange} type="text" name="lastName" placeholder="Last Name" className="form-control" value={lastName} />
-                <br />
-                <input onChange={onTextChange} type="text" name="email" placeholder="Email" className="form-control" value={email} />
-                <br />
-                <input onChange={onTextChange} type="password" name="password" placeholder="Password" className="form-control" value={password} />
-                <br />
-                <button className="btn btn-primary">Signup</button>
-            </form>
+        <div style={{ border: '1px solid #DCDCDC', padding: 16, width: 'fit-content', marginLeft: 425, marginTop: 86 }}>
+            <div style={{ fontWeight: 'bold', marginBottom: 16 }}>Create Account</div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <input style={inputStyle} type="text" name="firstName" placeholder="First Name" value={firstName} onChange={onTextChange} />
+                <input style={inputStyle} onChange={onTextChange} type="text" name="lastName" placeholder="Last Name" value={lastName} />
+                <input style={inputStyle} onChange={onTextChange} type="text" name="email" placeholder="Email" value={email} />
+                <input style={inputStyle} onChange={onTextChange} type="password" name="password" placeholder="Password" value={password} />
+                <button disabled={disableButton} onClick={(e) => onFormSubmit(e)} className="btn btn-primary">Signup</button>
+            </div>
         </div>
     )
 }
